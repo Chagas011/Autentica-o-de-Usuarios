@@ -2,13 +2,13 @@ import { JwtPayload, verify } from "jsonwebtoken";
 import { env } from "@/config/env";
 import { prismaClient } from "@/lib/prismaClient";
 import { User } from "@/entites/User";
-import { type cookies } from "next/headers";
+import type { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
 
-export function getAccessToken(cookieStore: ReturnType<typeof cookies>) {
+export function getAccessToken(cookieStore: ReadonlyRequestCookies) {
   return cookieStore.get("accessToken")?.value;
 }
 
-function verifyJwt(cookieStore: ReturnType<typeof cookies>) {
+function verifyJwt(cookieStore: ReadonlyRequestCookies) {
   const accessToken = getAccessToken(cookieStore);
 
   if (!accessToken) {
@@ -27,12 +27,12 @@ function verifyJwt(cookieStore: ReturnType<typeof cookies>) {
   }
 }
 
-export function isAuthenticated(cookieStore: ReturnType<typeof cookies>) {
+export function isAuthenticated(cookieStore: ReadonlyRequestCookies) {
   return !!verifyJwt(cookieStore);
 }
 
 export async function authUser(
-  cookieStore: ReturnType<typeof cookies>
+  cookieStore: ReadonlyRequestCookies
 ): Promise<User | null> {
   const userId = verifyJwt(cookieStore);
   if (!userId) return null;

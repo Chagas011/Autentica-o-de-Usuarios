@@ -8,7 +8,7 @@ export default async function DashboardLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const user = await authUser(cookieStore);
 
   if (!user) {

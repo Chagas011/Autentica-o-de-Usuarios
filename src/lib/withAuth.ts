@@ -11,7 +11,7 @@ export function withAuth(
   handler: (request: NextRequestWithUser) => Promise<unknown>
 ) {
   return async (request: NextRequest) => {
-    const cookieStore = cookies();
+    const cookieStore = await cookies();
     const user = await authUser(cookieStore);
 
     if (!user) {

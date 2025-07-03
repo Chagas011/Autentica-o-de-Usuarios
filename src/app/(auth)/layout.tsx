@@ -9,7 +9,7 @@ export default async function AuthLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   if (isAuthenticated(cookieStore)) {
     return redirect("/", RedirectType.replace);
   }

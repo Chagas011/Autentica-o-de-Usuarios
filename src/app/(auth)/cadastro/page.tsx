@@ -35,9 +35,7 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-export default function CadastroForm({
-  className,
-}: React.ComponentProps<"div">) {
+export default function CadastroForm() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
@@ -65,7 +63,7 @@ export default function CadastroForm({
     }
   });
   return (
-    <div className={cn("flex flex-col gap-6", className)}>
+    <div className={cn("flex flex-col gap-6")}>
       <Card>
         <CardHeader>
           <CardTitle className="text-2xl font-semibold">Cadastre-se</CardTitle>

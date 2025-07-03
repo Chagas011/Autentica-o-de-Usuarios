@@ -32,7 +32,7 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-export default function LoginForm({ className }: React.ComponentProps<"div">) {
+export default function LoginForm() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const form = useForm<FormData>({
@@ -62,7 +62,7 @@ export default function LoginForm({ className }: React.ComponentProps<"div">) {
     }
   });
   return (
-    <div className={cn("flex flex-col gap-6", className)}>
+    <div className={cn("flex flex-col gap-6")}>
       <Card>
         <CardHeader>
           <CardTitle className="text-2xl font-semibold">
